@@ -1,0 +1,17 @@
+text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+application/json,text/plain,*/*
+application/json
+text/plain
+text/html
+*/*
+text/css,*/*
+text/javascript,*/*
+image/png,image/svg+xml,image/*,*/*;q=0.8
+image/webp,image/svg+xml,image/*,*/*;q=0.8
+application/rss+xml, application/atom+xml, application/xml, text/xml
+application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8; charset=utf-8
+text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
