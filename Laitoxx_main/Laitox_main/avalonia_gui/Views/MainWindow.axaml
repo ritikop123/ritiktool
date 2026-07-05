@@ -1,0 +1,498 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:LaitoxxGui.ViewModels"
+        xmlns:models="using:LaitoxxGui.Models"
+        xmlns:views="using:LaitoxxGui.Views"
+        x:Class="LaitoxxGui.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Laitoxx DDoS — For authorised use only!"
+        Icon="/Assets/dos-round.ico"
+        Width="1020" Height="720"
+        MinWidth="860" MinHeight="600"
+        Background="#0a0005"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Inter,Segoe UI Variable,Segoe UI,sans-serif">
+
+  <!-- ══════════════════════  GLOBAL STYLES  ══════════════════════ -->
+  <Window.Styles>
+
+    <!-- ── TextBox ── -->
+    <Style Selector="TextBox">
+      <Setter Property="Background"      Value="#120008"/>
+      <Setter Property="Foreground"      Value="#e4e4e7"/>
+      <Setter Property="BorderBrush"     Value="#2d1020"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius"    Value="8"/>
+      <Setter Property="Padding"         Value="10,8"/>
+      <Setter Property="FontSize"        Value="13"/>
+      <Setter Property="CaretBrush"      Value="#ef4444"/>
+    </Style>
+    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+      <Setter Property="BorderBrush" Value="#ef4444"/>
+      <Setter Property="BoxShadow"   Value="0 0 0 3 #25ef4444"/>
+    </Style>
+
+    <!-- ── ComboBox ── -->
+    <Style Selector="ComboBox">
+      <Setter Property="Background"      Value="#120008"/>
+      <Setter Property="Foreground"      Value="#e4e4e7"/>
+      <Setter Property="BorderBrush"     Value="#2d1020"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius"    Value="8"/>
+      <Setter Property="FontSize"        Value="13"/>
+      <Setter Property="Padding"         Value="10,8"/>
+    </Style>
+    <Style Selector="ComboBox:focus /template/ Border#Background">
+      <Setter Property="BorderBrush" Value="#ef4444"/>
+      <Setter Property="BoxShadow"   Value="0 0 0 3 #25ef4444"/>
+    </Style>
+    <Style Selector="ComboBoxItem">
+      <Setter Property="Background" Value="#120008"/>
+      <Setter Property="Foreground" Value="#e4e4e7"/>
+      <Setter Property="Padding"    Value="10,6"/>
+    </Style>
+    <Style Selector="ComboBoxItem:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="#200010"/>
+    </Style>
+
+    <!-- ── Field label ── -->
+    <Style Selector="TextBlock.fl">
+      <Setter Property="Foreground"    Value="#4a1a2a"/>
+      <Setter Property="FontSize"      Value="10"/>
+      <Setter Property="FontWeight"    Value="SemiBold"/>
+      <Setter Property="Margin"        Value="2,0,0,5"/>
+      <Setter Property="LetterSpacing" Value="1.5"/>
+    </Style>
+
+    <!-- ── Section title ── -->
+    <Style Selector="TextBlock.st">
+      <Setter Property="Foreground"    Value="#4a1a2a"/>
+      <Setter Property="FontSize"      Value="9"/>
+      <Setter Property="FontWeight"    Value="Bold"/>
+      <Setter Property="LetterSpacing" Value="3"/>
+      <Setter Property="Margin"        Value="0,0,0,14"/>
+    </Style>
+
+    <!-- ── Card ── -->
+    <Style Selector="Border.card">
+      <Setter Property="Background"      Value="#0e0008"/>
+      <Setter Property="BorderBrush"     Value="#200010"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius"    Value="12"/>
+      <Setter Property="Padding"         Value="18,16"/>
+      <Setter Property="Margin"          Value="0,0,0,10"/>
+    </Style>
+
+    <!-- ── START button ── -->
+    <Style Selector="Button.btn-start">
+      <Setter Property="Background"      Value="#ef4444"/>
+      <Setter Property="Foreground"      Value="#fff"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="CornerRadius"    Value="10"/>
+      <Setter Property="Padding"         Value="0,13"/>
+      <Setter Property="FontSize"        Value="12"/>
+      <Setter Property="FontWeight"      Value="Bold"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="Cursor"          Value="Hand"/>
+    </Style>
+    <Style Selector="Button.btn-start /template/ ContentPresenter">
+      <Setter Property="BoxShadow" Value="0 0 20 5 #40ef4444"/>
+    </Style>
+    <Style Selector="Button.btn-start:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="#f87171"/>
+    </Style>
+    <Style Selector="Button.btn-start:disabled /template/ ContentPresenter">
+      <Setter Property="Background" Value="#2a0a0a"/>
+      <Setter Property="TextElement.Foreground" Value="#5a2020"/>
+    </Style>
+
+    <!-- ── STOP button ── -->
+    <Style Selector="Button.btn-stop">
+      <Setter Property="Background"      Value="#1a0508"/>
+      <Setter Property="Foreground"      Value="#f87171"/>
+      <Setter Property="BorderBrush"     Value="#3d1015"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius"    Value="10"/>
+      <Setter Property="Padding"         Value="0,13"/>
+      <Setter Property="FontSize"        Value="12"/>
+      <Setter Property="FontWeight"      Value="Bold"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="Cursor"          Value="Hand"/>
+    </Style>
+    <Style Selector="Button.btn-stop /template/ ContentPresenter">
+      <Setter Property="BoxShadow" Value="0 0 14 3 #25f87171"/>
+    </Style>
+    <Style Selector="Button.btn-stop:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="#2d0a10"/>
+    </Style>
+    <Style Selector="Button.btn-stop:disabled /template/ ContentPresenter">
+      <Setter Property="Background"   Value="#0f0205"/>
+      <Setter Property="TextElement.Foreground" Value="#3a0f10"/>
+    </Style>
+
+    <!-- ── Metric number ── -->
+    <Style Selector="TextBlock.mn">
+      <Setter Property="FontSize"   Value="32"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Foreground" Value="#ef4444"/>
+      <Setter Property="LineHeight" Value="36"/>
+    </Style>
+    <Style Selector="TextBlock.mu">
+      <Setter Property="FontSize"  Value="11"/>
+      <Setter Property="Foreground" Value="#2d0f18"/>
+      <Setter Property="VerticalAlignment" Value="Bottom"/>
+      <Setter Property="Margin"    Value="4,0,0,4"/>
+    </Style>
+    <Style Selector="TextBlock.ml">
+      <Setter Property="FontSize"      Value="9"/>
+      <Setter Property="FontWeight"    Value="Bold"/>
+      <Setter Property="Foreground"    Value="#2d0f18"/>
+      <Setter Property="LetterSpacing" Value="2"/>
+    </Style>
+
+    <!-- ── ProgressBar ── -->
+    <Style Selector="ProgressBar">
+      <Setter Property="Background"   Value="#1a0510"/>
+      <Setter Property="Foreground"   Value="#ef4444"/>
+      <Setter Property="Height"       Value="3"/>
+      <Setter Property="CornerRadius" Value="2"/>
+    </Style>
+
+    <!-- ── Thin scrollbar ── -->
+    <Style Selector="ScrollBar">
+      <Setter Property="Width" Value="3"/>
+    </Style>
+
+    <!-- ── CheckBox ── -->
+    <Style Selector="CheckBox">
+      <Setter Property="Foreground" Value="#a1a1aa"/>
+    </Style>
+  </Window.Styles>
+
+  <!-- ══════════════════════  ROOT  ══════════════════════ -->
+  <Grid RowDefinitions="52,*,30" Margin="20,14,20,0">
+
+    <!-- ── HEADER ────────────────────────────────────────────────────────── -->
+    <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center">
+
+      <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+        <StackPanel VerticalAlignment="Center">
+          <TextBlock Text="Laitoxx DDoS" Foreground="#ef4444" FontSize="17" FontWeight="ExtraBold"
+                     LetterSpacing="1"/>
+          <TextBlock Text="For authorised use only!" Foreground="#3d0f18" FontSize="9" LetterSpacing="1.5"/>
+        </StackPanel>
+      </StackPanel>
+
+      <!-- Status pill -->
+      <Border Grid.Column="2"
+              Background="#0e0008"
+              BorderBrush="#200010" BorderThickness="1"
+              CornerRadius="20" Padding="12,5">
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <Ellipse Width="6" Height="6" Fill="{Binding StatusColor}"/>
+          <TextBlock Text="{Binding StatusText}"
+                     Foreground="{Binding StatusColor}"
+                     FontSize="11" FontWeight="SemiBold" LetterSpacing="1"
+                     VerticalAlignment="Center"/>
+        </StackPanel>
+      </Border>
+    </Grid>
+
+    <!-- ── BODY ──────────────────────────────────────────────────────────── -->
+    <Grid Grid.Row="1" ColumnDefinitions="290,20,*" Margin="0,12,0,0">
+
+      <!-- ╔═══════════════╗ -->
+      <!-- ║  LEFT COLUMN  ║ -->
+      <!-- ╚═══════════════╝ -->
+      <ScrollViewer Grid.Column="0"
+                    HorizontalScrollBarVisibility="Disabled"
+                    VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+
+          <!-- TARGET CARD -->
+          <Border Classes="card">
+            <StackPanel>
+              <TextBlock Classes="st" Text="TARGET"/>
+
+              <StackPanel Spacing="4" Margin="0,0,0,10">
+                <TextBlock Classes="fl" Text="HOST / IP"/>
+                <TextBox Text="{Binding Target}"
+                         Watermark="example.com  ·  1.2.3.4"/>
+              </StackPanel>
+
+              <Grid ColumnDefinitions="*,10,105">
+                <StackPanel Spacing="4">
+                  <TextBlock Classes="fl" Text="PORT"/>
+                  <views:SpinnerControl Value="{Binding Port}"
+                                        Minimum="1" Maximum="65535" Step="1"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Spacing="4">
+                  <TextBlock Classes="fl" Text="RPS LIMIT"/>
+                  <views:SpinnerControl Value="{Binding Rps}"
+                                        Minimum="0" Maximum="1000000" Step="100"/>
+                </StackPanel>
+              </Grid>
+
+              <!-- Proxy file path -->
+              <StackPanel Spacing="4" Margin="0,10,0,4">
+                <TextBlock Classes="fl" Text="PROXY LIST  (txt file or single proxy)"/>
+                <Grid ColumnDefinitions="*,6,Auto">
+                  <TextBox Text="{Binding Proxy}"
+                           Watermark="socks5://127.0.0.1:9050  or  C:\proxies.txt"/>
+                  <Button Grid.Column="2"
+                          Content="…"
+                          Command="{Binding BrowseProxyFileCmd}"
+                          Background="#200010"
+                          Foreground="#a1a1aa"
+                          BorderBrush="#3d1020" BorderThickness="1"
+                          CornerRadius="8" Padding="10,8"
+                          FontSize="13" Cursor="Hand"/>
+                </Grid>
+              </StackPanel>
+              <TextBlock Foreground="#2d0f18" FontSize="9"
+                         Text="One proxy per line: type://[user:pass@]host:port"/>
+
+            </StackPanel>
+          </Border>
+
+          <!-- METHOD CARD -->
+          <Border Classes="card">
+            <StackPanel>
+              <TextBlock Classes="st" Text="METHOD"/>
+
+              <StackPanel Spacing="4" Margin="0,0,0,10">
+                <TextBlock Classes="fl" Text="CATEGORY"/>
+                <ComboBox ItemsSource="{Binding Categories}"
+                          SelectedItem="{Binding SelectedCategory}"
+                          HorizontalAlignment="Stretch"/>
+              </StackPanel>
+
+              <StackPanel Spacing="4">
+                <TextBlock Classes="fl" Text="ATTACK"/>
+                <ComboBox ItemsSource="{Binding Methods}"
+                          SelectedItem="{Binding SelectedMethod}"
+                          HorizontalAlignment="Stretch">
+                  <ComboBox.ItemTemplate>
+                    <DataTemplate x:DataType="models:AttackMethod">
+                      <StackPanel Margin="0,3">
+                        <TextBlock Text="{Binding DisplayName}"
+                                   Foreground="#e4e4e7" FontSize="13"/>
+                        <TextBlock Text="{Binding Description}"
+                                   Foreground="#3d1020" FontSize="10" Margin="0,1,0,0"/>
+                      </StackPanel>
+                    </DataTemplate>
+                  </ComboBox.ItemTemplate>
+                </ComboBox>
+              </StackPanel>
+            </StackPanel>
+          </Border>
+
+          <!-- PARAMS CARD -->
+          <Border Classes="card">
+            <StackPanel>
+              <TextBlock Classes="st" Text="PARAMETERS"/>
+              <Grid ColumnDefinitions="*,10,*">
+                <StackPanel Spacing="4">
+                  <TextBlock Classes="fl" Text="THREADS"/>
+                  <views:SpinnerControl Value="{Binding Threads}"
+                                        Minimum="1" Maximum="10000" Step="1"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Spacing="4">
+                  <TextBlock Classes="fl" Text="DURATION  (s)"/>
+                  <views:SpinnerControl Value="{Binding Duration}"
+                                        Minimum="1" Maximum="3600" Step="10"/>
+                </StackPanel>
+              </Grid>
+            </StackPanel>
+          </Border>
+
+          <!-- PROOF-OF-OWNERSHIP CARD -->
+          <Border Classes="card">
+            <StackPanel>
+
+              <!-- Header row: title + status badge -->
+              <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,10">
+                <TextBlock Classes="st" Text="PROOF OF OWNERSHIP" VerticalAlignment="Center" Margin="0"/>
+                <Border Grid.Column="1"
+                        Background="#120008"
+                        BorderBrush="{Binding PooStatusColor}"
+                        BorderThickness="1"
+                        CornerRadius="6"
+                        Padding="8,3">
+                  <TextBlock Text="{Binding PooStatus}"
+                             Foreground="{Binding PooStatusColor}"
+                             FontSize="10" FontWeight="SemiBold"/>
+                </Border>
+              </Grid>
+
+              <!-- unsafe toggle -->
+              <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,6">
+                <TextBlock VerticalAlignment="Center"
+                           Foreground="#6b2030" FontSize="11"
+                           Text="--unsafe  (skip ownership check)"/>
+                <CheckBox Grid.Column="1"
+                          IsChecked="{Binding Unsafe}"
+                          VerticalAlignment="Center"/>
+              </Grid>
+
+              <!-- i-know-what-im-doing toggle (alias, kept in sync) -->
+              <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,8">
+                <TextBlock VerticalAlignment="Center"
+                           Foreground="#4a1a2a" FontSize="10"
+                           Text="--i-know-what-im-doing  (alias)"/>
+                <CheckBox Grid.Column="1"
+                          IsChecked="{Binding Unsafe}"
+                          VerticalAlignment="Center"/>
+              </Grid>
+
+              <!-- Verify button -->
+              <Button Content="⚿  Verify Ownership"
+                      Command="{Binding VerifyOwnershipCmd}"
+                      IsEnabled="{Binding !Unsafe}"
+                      Background="#120008"
+                      Foreground="#ef4444"
+                      BorderBrush="#3d1020"
+                      BorderThickness="1"
+                      CornerRadius="8"
+                      Padding="0,9"
+                      FontSize="11"
+                      FontWeight="SemiBold"
+                      HorizontalContentAlignment="Center"
+                      HorizontalAlignment="Stretch"
+                      Cursor="Hand"/>
+
+              <TextBlock Foreground="#2d0f18" FontSize="9" Margin="0,6,0,0"
+                         TextWrapping="Wrap"
+                         Text="Use TUI option 8 for DNS TXT (L7) or reverse-connect (L4) wizard."/>
+
+            </StackPanel>
+          </Border>
+
+          <!-- ACTION BUTTONS -->
+          <Grid ColumnDefinitions="*,8,*">
+            <Button Grid.Column="0" Classes="btn-start"
+                    Content="▶  START"
+                    Command="{Binding StartCmd}"/>
+            <Button Grid.Column="2" Classes="btn-stop"
+                    Content="■  STOP"
+                    Command="{Binding StopCmd}"/>
+          </Grid>
+
+        </StackPanel>
+      </ScrollViewer>
+
+      <!-- ╔════════════════╗ -->
+      <!-- ║  RIGHT COLUMN  ║ -->
+      <!-- ╚════════════════╝ -->
+      <Grid Grid.Column="2" RowDefinitions="Auto,12,*">
+
+        <!-- TELEMETRY ROW -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,10,*,10,*">
+
+          <!-- PPS -->
+          <Border Grid.Column="0" Classes="card" Margin="0">
+            <StackPanel>
+              <TextBlock Classes="ml" Text="PPS"/>
+              <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                <TextBlock Classes="mn" Text="{Binding PpsFormatted}"/>
+                <TextBlock Classes="mu" Text="req/s"/>
+              </StackPanel>
+            </StackPanel>
+          </Border>
+
+          <!-- TOTAL -->
+          <Border Grid.Column="2" Classes="card" Margin="0">
+            <StackPanel>
+              <TextBlock Classes="ml" Text="TOTAL SENT"/>
+              <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                <TextBlock Classes="mn" Text="{Binding PktsFormatted}"/>
+                <TextBlock Classes="mu" Text="pkts"/>
+              </StackPanel>
+            </StackPanel>
+          </Border>
+
+          <!-- ETA -->
+          <Border Grid.Column="4" Classes="card" Margin="0">
+            <StackPanel>
+              <TextBlock Classes="ml" Text="REMAINING"/>
+              <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                <TextBlock Classes="mn" Text="{Binding EtaFormatted}" Foreground="#f87171"/>
+                <TextBlock Classes="mu" Text="eta" Foreground="#2d0f18"/>
+              </StackPanel>
+            </StackPanel>
+          </Border>
+
+        </Grid>
+
+        <!-- CHART + LOG (bottom half) -->
+        <Grid Grid.Row="2" RowDefinitions="Auto,10,*">
+
+          <!-- CHART CARD -->
+          <Border Grid.Row="0" Classes="card" Margin="0" Padding="16,14">
+            <StackPanel Spacing="8">
+
+              <!-- Progress -->
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Text="PROGRESS" Foreground="#2d0f18" FontSize="9"
+                           FontWeight="Bold" LetterSpacing="2.5" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1"
+                           Text="{Binding ProgressPct, StringFormat={}{0:F0}%}"
+                           Foreground="#4a1a2a" FontSize="10"/>
+              </Grid>
+              <ProgressBar Value="{Binding ProgressPct}" Minimum="0" Maximum="100"/>
+
+              <!-- PPS Chart -->
+              <views:PpsChartControl Values="{Binding ChartValues}"
+                                     Height="140"
+                                     Margin="0,6,0,0"/>
+            </StackPanel>
+          </Border>
+
+          <!-- LOG CARD -->
+          <Border Grid.Row="2" Classes="card" Margin="0" Padding="16,12">
+            <Grid RowDefinitions="Auto,*">
+
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Text="LOG" Foreground="#2d0f18" FontSize="9"
+                           FontWeight="Bold" LetterSpacing="2.5" VerticalAlignment="Center"/>
+                <Border Background="#120008" BorderBrush="#200010" BorderThickness="1"
+                        CornerRadius="4" Padding="6,2">
+                  <TextBlock Text="{Binding LogEntries.Count}"
+                             Foreground="#3d1020" FontSize="10"/>
+                </Border>
+              </StackPanel>
+
+              <ScrollViewer Grid.Row="1"
+                            x:Name="LogScroll"
+                            Margin="0,8,0,0"
+                            HorizontalScrollBarVisibility="Disabled"
+                            VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding LogEntries}">
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:LogEntry">
+                      <TextBlock Text="{Binding Text}"
+                                 Foreground="{Binding Color}"
+                                 FontFamily="Cascadia Mono,Consolas,monospace"
+                                 FontSize="11" TextWrapping="Wrap" Margin="0,1"/>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+              </ScrollViewer>
+
+            </Grid>
+          </Border>
+        </Grid>
+
+      </Grid>
+    </Grid>
+
+    <!-- ── FOOTER ─────────────────────────────────────────────────────────── -->
+    <TextBlock Grid.Row="2"
+               Text="Laitoxx DDoS — For authorized stress testing only. Operator assumes full liability."
+               Foreground="#200010" FontSize="10"
+               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+  </Grid>
+</Window>

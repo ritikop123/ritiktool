@@ -1,0 +1,63 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:self="using:LaitoxxGui.Views"
+             x:Class="LaitoxxGui.Views.SpinnerControl"
+             x:DataType="self:SpinnerControl">
+
+  <UserControl.Styles>
+    <Style Selector="Button.spin-btn">
+      <Setter Property="Background"    Value="#1e1e26"/>
+      <Setter Property="Foreground"    Value="#71717a"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Width"         Value="28"/>
+      <Setter Property="Padding"       Value="0"/>
+      <Setter Property="FontSize"      Value="15"/>
+      <Setter Property="FontWeight"    Value="Light"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment"   Value="Center"/>
+      <Setter Property="Cursor"        Value="Hand"/>
+    </Style>
+    <Style Selector="Button.spin-btn:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="#27272a"/>
+      <Setter Property="TextElement.Foreground" Value="#e4e4e7"/>
+    </Style>
+    <Style Selector="Button.spin-btn:pressed /template/ ContentPresenter">
+      <Setter Property="Background" Value="#10b981"/>
+      <Setter Property="TextElement.Foreground" Value="#fff"/>
+    </Style>
+  </UserControl.Styles>
+
+  <Border Background="#131318"
+          BorderBrush="#2d2d35"
+          BorderThickness="1"
+          CornerRadius="8">
+    <Grid ColumnDefinitions="28,*,28">
+
+      <!-- Minus -->
+      <Button Grid.Column="0" Classes="spin-btn"
+              Content="−"
+              Click="OnMinus"
+              CornerRadius="8,0,0,8"/>
+
+      <!-- Value display / input -->
+      <TextBox Grid.Column="1"
+               x:Name="ValueBox"
+               Text="{Binding Value, Mode=TwoWay}"
+               Background="Transparent"
+               BorderThickness="0"
+               Foreground="#e4e4e7"
+               FontSize="13"
+               TextAlignment="Center"
+               Padding="0"
+               VerticalContentAlignment="Center"
+               KeyDown="OnKeyDown"/>
+
+      <!-- Plus -->
+      <Button Grid.Column="2" Classes="spin-btn"
+              Content="+"
+              Click="OnPlus"
+              CornerRadius="0,8,8,0"/>
+
+    </Grid>
+  </Border>
+</UserControl>

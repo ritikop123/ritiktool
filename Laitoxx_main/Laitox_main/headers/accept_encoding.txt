@@ -1,0 +1,33 @@
+gzip, deflate, br
+gzip, deflate
+gzip, compress, br
+deflate, br
+gzip
+deflate
+br
+compress, gzip
+compress, deflate
+compress, deflate, br
+identity
+gzip, deflate, sdch
+gzip, deflate, sdch, br
+gzip, deflate, lzma, sdch
+gzip, deflate, lzma, sdch, br
+gzip, deflate, lzma
+gzip, deflate, br, zstd
+gzip, deflate, br, zstd, snappy
+gzip, deflate, br, zstd, snappy, lz4
+gzip, deflate, br, zstd, snappy, lz4, brotli
+gzip, deflate, br, zstd, snappy, lz4, brotli, lzma
+gzip, deflate, br, zstd, snappy, lz4, brotli, lzma, compress
+gzip, deflate, br, zstd, snappy, lz4, brotli, lzma, compress, identity
+gzip;q=1.0, deflate;q=1.0, br;q=1.0
+gzip;q=1.0, deflate;q=1.0
+br;q=1.0, gzip;q=1.0, deflate;q=1.0
+br;q=1.0, gzip;q=1.0
+deflate;q=1.0, gzip;q=1.0, br;q=1.0
+deflate;q=1.0, gzip;q=1.0
+compress;q=1.0, gzip;q=1.0, deflate;q=1.0
+compress;q=1.0, gzip;q=1.0
+identity;q=1.0
+*
