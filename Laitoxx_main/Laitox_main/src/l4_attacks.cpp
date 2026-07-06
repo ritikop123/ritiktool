@@ -16,6 +16,7 @@
     #include <netinet/ip_icmp.h>
     #include <arpa/inet.h>
     #include <unistd.h>
+    #include <fcntl.h>
     #define SOCKET int
     #define INVALID_SOCKET -1
 #endif
