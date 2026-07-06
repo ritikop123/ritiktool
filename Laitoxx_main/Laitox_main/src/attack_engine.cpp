@@ -27,6 +27,7 @@
     #include <netinet/tcp.h>
     #include <arpa/inet.h>
     #include <unistd.h>
+    #include <fcntl.h>
     #define SOCKET int
     #define INVALID_SOCKET -1
     #define SOCKET_ERROR -1
